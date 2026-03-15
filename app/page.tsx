@@ -109,6 +109,10 @@ export default function Home() {
   const activeId = useRef<HoverItemId | null>(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
+  const [winPos, setWinPos] = useState<{ x: number; y: number } | null>(null);
+  const dragOffset = useRef<{ x: number; y: number } | null>(null);
+  const isDragging = useRef(false);
+
   useEffect(() => {
     const upd = () => { setVpW(window.innerWidth); setVpH(window.innerHeight); };
     upd();
@@ -191,6 +195,29 @@ export default function Home() {
     clearAll();
   }, [clearAll]);
 
+  const handleTitlebarMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    isDragging.current = true;
+    const rect = (e.currentTarget.closest('.window') as HTMLElement).getBoundingClientRect();
+    dragOffset.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    if (winPos === null) {
+      const vpw = window.innerWidth;
+      const vph = window.innerHeight;
+      setWinPos({ x: vpw / 2 - 190, y: vph / 2 - rect.height / 2 });
+    }
+    const onMove = (ev: MouseEvent) => {
+      if (!isDragging.current || !dragOffset.current) return;
+      setWinPos({ x: ev.clientX - dragOffset.current.x, y: ev.clientY - dragOffset.current.y });
+    };
+    const onUp = () => {
+      isDragging.current = false;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [winPos]);
+
   const rawPanelX = panelAnchor.x + 22;
   const rawPanelY = panelAnchor.y + 22;
   const panelX = Math.min(rawPanelX, vpW - 340);
@@ -257,7 +284,7 @@ export default function Home() {
         }
         .trash-wrap { position: fixed; bottom: 20px; right: 12px; z-index: 10; }
         .window {
-          position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+          position: fixed;
           width: 380px; background: #ebebeb; border-radius: 6px; border: 1px solid #888;
           box-shadow: 0 0 0 1px rgba(255,255,255,0.8) inset, 0 12px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
           overflow: hidden; z-index: 50;
@@ -370,8 +397,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="window">
-        <div className="window-titlebar">
+      <div
+        className="window"
+        style={winPos ? { left: winPos.x, top: winPos.y } : { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+      >
+        <div className="window-titlebar" onMouseDown={handleTitlebarMouseDown} style={{ userSelect: 'none' }}>
           <div className="win-btn close" />
           <div className="win-btn min" />
           <div className="win-btn max" />
