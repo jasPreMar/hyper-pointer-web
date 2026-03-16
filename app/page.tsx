@@ -239,11 +239,11 @@ export default function Home() {
           margin: 0; padding: 0; overflow: hidden;
           height: 100%; width: 100%;
           font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-          background: #111;
+          background: #3f7a8c;
         }
         .desktop {
           position: fixed; inset: 0;
-          background-color: #111;
+          background-color: #3f7a8c;
           background-image: url('/desktop-bg.png');
           background-size: cover;
           background-position: center;
