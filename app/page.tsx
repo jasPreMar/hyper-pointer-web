@@ -26,7 +26,7 @@ const ITEMS: Record<HoverItemId, HoverItem> = {
   hp: {
     context: 'Finder › Desktop\napp: HyperPointer\nrole: application icon',
     q: 'what does this app do?',
-    a: "Adds a floating AI panel to your cursor. Hover over anything, press Ctrl+Space, ask Claude about it. Reads what's under your cursor automatically — no context-setting needed.",
+    a: "Adds a floating AI panel to your cursor. Hold ⌘, point at anything on your Mac, and ask Claude about it. Reads what's under your cursor automatically — no context-setting needed.",
   },
   trash: {
     context: 'Finder › Desktop\nicon: Trash\nrole: button\nstate: empty',
@@ -412,8 +412,8 @@ export default function Home() {
           <div className="app-name">HyperPointer</div>
           <div className="app-sub">Version 1.0.31</div>
           <p className="app-tagline">
+            Hold <kbd style={{ fontFamily: 'inherit', fontWeight: 700 }}>⌘</kbd>.<br />
             Point at anything on your screen.<br />
-            Press <kbd style={{ fontFamily: 'inherit', fontWeight: 700 }}>Ctrl+Space</kbd>.<br />
             Ask Claude about it.
           </p>
           <a href={DMG_URL} download="HyperPointer.dmg" className="download-btn" {...bind('download')}>
