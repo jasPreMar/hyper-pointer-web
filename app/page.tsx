@@ -239,14 +239,15 @@ export default function Home() {
           margin: 0; padding: 0; overflow: hidden;
           height: 100%; width: 100%;
           font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-          background: #3f7a8c;
+          background: #111;
         }
         .desktop {
           position: fixed; inset: 0;
-          background-color: #3f7a8c;
-          background-image:
-            radial-gradient(ellipse at 30% 40%, rgba(80,140,160,0.4) 0%, transparent 60%),
-            radial-gradient(ellipse at 70% 70%, rgba(30,60,80,0.3) 0%, transparent 50%);
+          background-color: #111;
+          background-image: url('/desktop-bg.png');
+          background-size: cover;
+          background-position: center;
+          image-rendering: pixelated;
         }
         .menubar {
           position: fixed; top: 0; left: 0; right: 0; height: 22px;
