@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 const DMG_URL =
-  'https://github.com/jasPreMar/hyper-pointer/releases/download/v1.0.31/HyperPointer.dmg';
+  'https://github.com/jasPreMar/hyper-pointer/releases/latest/download/HyperPointer.dmg';
 
 // ─── Hover items ─────────────────────────────────────────────────────────────
 
