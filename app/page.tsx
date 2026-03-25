@@ -24,7 +24,7 @@ const ITEMS: Record<HoverItemId, HoverItem> = {
     isAction: true,
   },
   hp: {
-    context: 'Finder › Desktop\napp: HyperPointer\nrole: application icon',
+    context: 'Finder › Desktop\napp: This\nrole: application icon',
     q: 'what does this app do?',
     a: "Adds a floating AI panel to your cursor. Hold ⌘, point at anything on your Mac, and ask Claude about it. Reads what's under your cursor automatically — no context-setting needed.",
   },
@@ -35,7 +35,7 @@ const ITEMS: Record<HoverItemId, HoverItem> = {
     isAction: true,
   },
   download: {
-    context: 'HyperPointer › About\nbutton: Download for Mac\nrole: default button\nversion: 1.0.31',
+    context: 'This › About\nbutton: Download for Mac\nrole: default button\nversion: 1.0.31',
     q: 'what does this download?',
     a: 'HyperPointer.dmg — 1.8 MB. Open it, drag to Applications, launch it. Walks you through Accessibility and Screen Recording permissions on first run. Requires macOS 14+ and the Claude CLI.',
   },
@@ -387,7 +387,7 @@ export default function Home() {
         </div>
         <div className={`icon-item ${hoveredId === 'hp' ? 'active' : ''}`} {...bind('hp')}>
           <IconHP />
-          <span className="icon-label">HyperPointer</span>
+          <span className="icon-label">This</span>
         </div>
       </div>
 
@@ -406,18 +406,18 @@ export default function Home() {
           <div className="win-btn close" />
           <div className="win-btn min" />
           <div className="win-btn max" />
-          <span className="window-title">HyperPointer</span>
+          <span className="window-title">This</span>
         </div>
         <div className="window-body">
           <IconHP />
-          <div className="app-name">HyperPointer</div>
+          <div className="app-name">This</div>
           <div className="app-sub">Version 1.0.31</div>
           <p className="app-tagline">
             Hold <kbd style={{ fontFamily: 'inherit', fontWeight: 700 }}>⌘</kbd>.<br />
             Point at anything on your screen.<br />
             Ask Claude about it.
           </p>
-          <a href={DMG_URL} download="HyperPointer.dmg" className="download-btn" {...bind('download')}>
+          <a href={DMG_URL} download="This.dmg" className="download-btn" {...bind('download')}>
             Download for Mac
           </a>
           <div className="dl-meta">macOS 14+ &nbsp;·&nbsp; Free &nbsp;·&nbsp; Requires Claude CLI</div>
@@ -428,7 +428,7 @@ export default function Home() {
         <div className="hp-panel" style={{ left: panelX, top: panelY }}>
           <div className="hp-header">
             <div className="hp-dot" />
-            <span className="hp-app-label">HyperPointer</span>
+            <span className="hp-app-label">This</span>
           </div>
           <div className="hp-context">{currentItem.context}</div>
           {convState !== 'idle' && (
