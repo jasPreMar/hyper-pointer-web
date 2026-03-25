@@ -37,7 +37,7 @@ const ITEMS: Record<HoverItemId, HoverItem> = {
   download: {
     context: 'This › About\nbutton: Download for Mac\nrole: default button\nversion: 1.0.31',
     q: 'what does this download?',
-    a: 'This.dmg — 1.8 MB. Open it, drag to Applications, launch it. Walks you through Accessibility and Screen Recording permissions on first run. Requires macOS 14+ and the Claude CLI.',
+    a: 'HyperPointer.dmg — 1.8 MB. Open it, drag to Applications, launch it. Walks you through Accessibility and Screen Recording permissions on first run. Requires macOS 14+ and the Claude CLI.',
   },
   apple: {
     context: 'menu bar\n① Apple menu\nrole: menu button',
