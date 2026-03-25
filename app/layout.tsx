@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'HyperPointer — Point at anything. Ask Claude.',
-  description: 'HyperPointer adds a floating AI panel to your cursor. Hold ⌘, point at anything on your Mac, and ask Claude about it.',
+  title: 'This — Point at anything. Ask Claude.',
+  description: 'This adds a floating AI panel to your cursor. Hold ⌘, point at anything on your Mac, and ask Claude about it.',
   openGraph: {
-    title: 'HyperPointer',
+    title: 'This',
     description: 'Point at anything on your screen. Ask Claude about it.',
   },
 };
