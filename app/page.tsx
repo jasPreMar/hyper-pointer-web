@@ -318,6 +318,21 @@ export default function Home() {
           transform: translateY(1px);
           box-shadow: 0 0 0 3px #333, 0 -1px 0 #fff inset, 0 1px 0 rgba(0,0,0,0.15) inset;
         }
+        .btn-row { display: flex; gap: 10px; align-items: center; margin-top: 0; }
+        .github-btn {
+          display: inline-block; padding: 10px 24px;
+          background: transparent;
+          border: 2px solid #333; border-radius: 6px;
+          box-shadow: 0 0 0 3px #333;
+          font-size: 15px; font-weight: 700; color: #111; text-decoration: none;
+          letter-spacing: -0.2px; transition: box-shadow 0.08s, transform 0.08s, background 0.08s;
+          -webkit-font-smoothing: antialiased;
+        }
+        .github-btn:hover { background: rgba(0,0,0,0.04); }
+        .github-btn:active {
+          transform: translateY(1px);
+          box-shadow: 0 0 0 3px #333;
+        }
         .dl-meta { font-size: 10px; color: #999; margin-top: 2px; letter-spacing: 0.2px; }
         .hp-panel {
           position: fixed; z-index: 9000; width: 320px;
@@ -417,9 +432,14 @@ export default function Home() {
             Point at anything on your screen.<br />
             Ask Claude about it.
           </p>
-          <a href={DMG_URL} download="This.dmg" className="download-btn" {...bind('download')}>
-            Download for Mac
-          </a>
+          <div className="btn-row">
+            <a href={DMG_URL} download="This.dmg" className="download-btn" {...bind('download')}>
+              Download for Mac
+            </a>
+            <a href="https://github.com/jasPreMar/this" target="_blank" rel="noopener noreferrer" className="github-btn">
+              GitHub
+            </a>
+          </div>
           <div className="dl-meta">macOS 14+ &nbsp;·&nbsp; Free &nbsp;·&nbsp; Requires Claude CLI</div>
         </div>
       </div>
