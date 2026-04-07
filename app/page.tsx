@@ -528,6 +528,17 @@ export default function Home() {
           font-size: 14px; color: #000; text-align: center;
           line-height: 1.6; max-width: 260px; margin: 4px 0 8px;
         }
+        .video-embed {
+          width: 100%; max-width: 320px;
+          aspect-ratio: 16 / 9;
+          border: 2px solid #000;
+          margin: 4px 0;
+          background: #000;
+        }
+        .video-embed iframe {
+          width: 100%; height: 100%;
+          border: none; display: block;
+        }
         .download-btn {
           display: inline-block; padding: 8px 32px;
           background: #fff;
@@ -967,6 +978,14 @@ export default function Home() {
             <br />
             It already knows what you mean.
           </p>
+          <div className="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/e7nriIU9bM8"
+              title="This — Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
           <div className="btn-row">
             <a
               href={DMG_URL}
