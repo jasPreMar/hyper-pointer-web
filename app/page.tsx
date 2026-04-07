@@ -7,7 +7,7 @@ const DMG_URL =
 
 // ─── Hover items ─────────────────────────────────────────────────────────────
 
-type HoverItemId = 'hd' | 'hp' | 'trash' | 'download' | 'apple' | 'finder';
+type HoverItemId = 'hd' | 'trash' | 'download' | 'apple' | 'finder';
 
 interface HoverItem {
   context: string;
@@ -18,78 +18,77 @@ interface HoverItem {
 
 const ITEMS: Record<HoverItemId, HoverItem> = {
   hd: {
-    context: 'Finder › Desktop\nicon: Macintosh HD\nrole: disk icon\n500 GB · 156 GB used',
+    context: 'Finder \u203A Desktop\nicon: System Software\nrole: disk icon\n500 GB \u00B7 156 GB used',
     q: 'how much space is left?',
     a: '$ df -h /\nFilesystem   Size   Used  Avail\n/dev/disk3  500G   156G   344G\n\n344 GB free. Biggest hogs are Movies (92 GB) and Downloads (28 GB).',
     isAction: true,
   },
-  hp: {
-    context: 'Finder › Desktop\napp: This\nrole: application icon',
-    q: 'what does this app do?',
-    a: "Adds a floating AI panel to your cursor. Hold ⌘, point at anything on your Mac, and ask Claude about it. Reads what's under your cursor automatically — no context-setting needed.",
-  },
   trash: {
-    context: 'Finder › Desktop\nicon: Trash\nrole: button\nstate: empty',
+    context: 'Finder \u203A Desktop\nicon: Trash\nrole: button\nstate: empty',
     q: 'anything in here?',
-    a: "$ ls ~/.Trash\n(empty)\n\nNothing. You're good.",
+    a: "$ ls ~/.Trash\n(empty)\n\nNothing. You\u2019re good.",
     isAction: true,
   },
   download: {
-    context: 'This › About\nbutton: Download for Mac\nrole: default button\nversion: 1.0.31',
+    context: 'This \u203A About\nbutton: Download for Mac\nrole: default button\nversion: 1.0.31',
     q: 'what does this download?',
-    a: 'HyperPointer.dmg — 1.8 MB. Open it, drag to Applications, launch it. Walks you through Accessibility and Screen Recording permissions on first run. Requires macOS 14+ and the Claude CLI.',
+    a: 'HyperPointer.dmg \u2014 1.8 MB. Open it, drag to Applications, launch it. Walks you through Accessibility and Screen Recording permissions on first run. Requires macOS 14+ and the Claude CLI.',
   },
   apple: {
-    context: 'menu bar\n① Apple menu\nrole: menu button',
-    q: "what's in this menu?",
-    a: "About This Mac, System Settings, App Store, Recent Items, Force Quit, Sleep, Restart, Shut Down. The Apple menu layout hasn't meaningfully changed since 2001.",
+    context: 'menu bar\n\u2460 Apple menu\nrole: menu button',
+    q: "what\u2019s in this menu?",
+    a: "About This Mac, System Settings, App Store, Recent Items, Force Quit, Sleep, Restart, Shut Down. The Apple menu layout hasn\u2019t meaningfully changed since 2001.",
   },
   finder: {
-    context: 'menu bar\nFinder\nrole: active application name\nstate: frontmost',
-    q: 'can I quit Finder?',
-    a: '$ killall Finder\n[Finder relaunches automatically]\n\nYou can kill it but macOS restarts it immediately. Protected process.',
+    context: 'menu bar\nFile\nrole: menu item\nstate: frontmost',
+    q: 'what does File do?',
+    a: 'New Folder, Open, Print, Close Window, Get Info, Duplicate, Make Alias, Put Away. Standard Finder file operations since System 1.',
     isAction: true,
   },
 };
 
 type ConvState = 'idle' | 'typing-q' | 'waiting' | 'typing-a' | 'done';
 
-function IconHD() {
+/* ─── 1-bit Classic Mac Icons (from Figma) ────────────────────────────────── */
+
+function IconFloppy() {
   return (
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-      <rect x="4" y="8" width="36" height="28" rx="3" fill="#d4d0c8" stroke="#666" strokeWidth="1.5" />
-      <rect x="4" y="8" width="36" height="8" rx="3" fill="#b8b4ac" stroke="#666" strokeWidth="1.5" />
-      <rect x="8" y="20" width="20" height="10" rx="1" fill="white" stroke="#999" strokeWidth="1" />
-      <line x1="10" y1="23" x2="26" y2="23" stroke="#ccc" strokeWidth="1" />
-      <line x1="10" y1="26" x2="20" y2="26" stroke="#ccc" strokeWidth="1" />
-      <circle cx="34" cy="28" r="3" fill="#4adb80" />
-      <circle cx="34" cy="28" r="1.5" fill="#7fffaa" />
+    <svg width="45" height="47" viewBox="0 0 46 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.5 45.8475H43.5C44.6046 45.8475 45.5 44.9521 45.5 43.8475V7.73414C45.5 7.27527 45.3422 6.83034 45.0531 6.47401L40.8062 1.23986C40.4264 0.771819 39.8559 0.5 39.2531 0.5H2.5C1.39543 0.5 0.5 1.39543 0.5 2.5V43.8475C0.5 44.9521 1.39543 45.8475 2.5 45.8475Z" fill="white" stroke="black"/>
+      <path d="M6.5882 46.5V29.2518C6.5882 28.1472 7.48363 27.2518 8.5882 27.2518H37.9411C39.0457 27.2518 39.9411 28.1472 39.9411 29.2518V46.5" stroke="black"/>
+      <path d="M34.1176 0.500015L34.1176 13.5071C34.1176 14.6117 33.2222 15.5071 32.1176 15.5071L12.8235 15.5071C11.7189 15.5071 10.8235 14.6117 10.8235 13.5071L10.8235 0.500018" stroke="black"/>
+      <rect x="23.5" y="3.60992" width="5.88235" height="8.78723" rx="1.5" fill="white" stroke="black"/>
     </svg>
   );
 }
 
-function IconHP() {
+function IconTrash() {
   return (
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-      <rect x="4" y="4" width="36" height="36" rx="8" fill="#1a1a2e" />
-      <rect x="4" y="4" width="36" height="36" rx="8" stroke="#3a3a6e" strokeWidth="1" />
-      <path d="M12 10 L12 30 L18 24 L22 32 L26 30 L22 22 L28 22 Z"
-        fill="white" stroke="black" strokeWidth="1" strokeLinejoin="round" />
-      <circle cx="30" cy="14" r="5" fill="#4af0a0" />
-      <circle cx="30" cy="14" r="2.5" fill="#9fffcc" />
+    <svg width="32" height="46" viewBox="0 0 32 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12.5" y="0.5" width="8" height="1.93617" fill="white" stroke="black"/>
+      <rect x="0.5" y="2.45744" width="31" height="2.91489" fill="white" stroke="black"/>
+      <path d="M30.5 5.39362V44.0001C30.5 44.8285 29.8284 45.5001 29 45.5001H3C2.17159 45.5001 1.50003 44.8285 1.5 44.0001V5.39362H30.5Z" fill="white" stroke="black"/>
+      <path d="M6 9.78723L6.89893 10.667C7.28334 11.0433 7.5 11.5585 7.5 12.0964V39.0445C7.5 39.7203 7.1588 40.3503 6.5929 40.7195L6 41.1064" stroke="black"/>
+      <path d="M12 9.78723L12.8989 10.667C13.2833 11.0433 13.5 11.5585 13.5 12.0964V39.0445C13.5 39.7203 13.1588 40.3503 12.5929 40.7195L12 41.1064" stroke="black"/>
+      <path d="M18 9.78723L18.8989 10.667C19.2833 11.0433 19.5 11.5585 19.5 12.0964V39.0445C19.5 39.7203 19.1588 40.3503 18.5929 40.7195L18 41.1064" stroke="black"/>
+      <path d="M24 9.78723L24.8989 10.667C25.2833 11.0433 25.5 11.5585 25.5 12.0964V39.0445C25.5 39.7203 25.1588 40.3503 24.5929 40.7195L24 41.1064" stroke="black"/>
     </svg>
   );
 }
 
-function IconTrash({ empty }: { empty: boolean }) {
+function IconFolder() {
   return (
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-      <rect x="10" y="10" width="24" height="5" rx="2" fill="#d4d0c8" stroke="#888" strokeWidth="1.5" />
-      <rect x="17" y="7" width="10" height="5" rx="2" fill="#d4d0c8" stroke="#888" strokeWidth="1.5" />
-      <path d="M12 16 L14 36 L30 36 L32 16 Z" fill={empty ? '#d4d0c8' : '#b8b4ac'} stroke="#888" strokeWidth="1.5" />
-      <line x1="18" y1="20" x2="18" y2="33" stroke="#999" strokeWidth="1" />
-      <line x1="22" y1="20" x2="22" y2="33" stroke="#999" strokeWidth="1" />
-      <line x1="26" y1="20" x2="26" y2="33" stroke="#999" strokeWidth="1" />
+    <svg width="46" height="35" viewBox="0 0 46 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0.5" y="5.5" width="45" height="29" rx="1.5" fill="white" stroke="black"/>
+      <path d="M6.91421 1.08579L2.5 5.5H21.5L17.5959 1.16207C17.2166 0.740643 16.6762 0.5 16.1093 0.5H8.32843C7.79799 0.5 7.28929 0.710713 6.91421 1.08579Z" fill="white" stroke="black"/>
+    </svg>
+  );
+}
+
+function AppleLogo() {
+  return (
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.86104 2.55483C9.3623 1.95654 9.70995 1.13997 9.70995 0.315311C9.70995 0.202122 9.70187 0.0889338 9.67762 0C8.87721 0.0323396 7.90702 0.533603 7.32491 1.21273C6.87216 1.73017 6.45174 2.55483 6.45174 3.37948C6.45174 3.50884 6.46791 3.63012 6.48408 3.67054C6.53259 3.67863 6.61344 3.6948 6.69429 3.6948C7.42193 3.6948 8.32744 3.2097 8.86104 2.55483ZM9.43507 3.86458C8.22233 3.86458 7.24406 4.6003 6.61344 4.6003C5.9424 4.6003 5.06923 3.91309 4.01819 3.91309C2.02122 3.91309 0 5.56241 0 8.667C0 10.6074 0.74381 12.6529 1.67357 13.9707C2.46589 15.0864 3.16119 16 4.15563 16C5.15008 16 5.58666 15.3451 6.80748 15.3451C8.06064 15.3451 8.33552 15.9838 9.43507 15.9838C10.5184 15.9838 11.238 14.9894 11.9171 14.0111C12.6852 12.8873 13.0005 11.7959 13.0167 11.7393C12.952 11.7231 10.8742 10.8742 10.8742 8.50531C10.8742 6.45174 12.5073 5.53007 12.5963 5.4573C11.5291 3.91309 9.88782 3.86458 9.43507 3.86458Z" fill="black"/>
     </svg>
   );
 }
@@ -101,7 +100,6 @@ export default function Home() {
   const [convState, setConvState] = useState<ConvState>('idle');
   const [displayQ, setDisplayQ] = useState('');
   const [displayA, setDisplayA] = useState('');
-  const [time, setTime] = useState('');
   const [vpW, setVpW] = useState(1200);
   const [vpH, setVpH] = useState(800);
 
@@ -118,16 +116,6 @@ export default function Home() {
     upd();
     window.addEventListener('resize', upd);
     return () => window.removeEventListener('resize', upd);
-  }, []);
-
-  useEffect(() => {
-    const tick = () => {
-      const d = new Date();
-      setTime(d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
-    };
-    tick();
-    const id = setInterval(tick, 30000);
-    return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
@@ -234,201 +222,333 @@ export default function Home() {
   return (
     <>
       <style>{`
+        @font-face {
+          font-family: 'ChicagoFLF';
+          src: url('/fonts/ChicagoFLF.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
         *, *::before, *::after { box-sizing: border-box; cursor: none !important; }
         html, body {
           margin: 0; padding: 0; overflow: hidden;
           height: 100%; width: 100%;
-          font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-          background: #3f7a8c;
+          font-family: 'Geneva', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          background: #fff;
         }
+
+        /* ─── Desktop ─────────────────────────────────────── */
         .desktop {
           position: fixed; inset: 0;
-          background-color: #3f7a8c;
-          background-image: url('/desktop-bg.png');
-          background-size: cover;
-          background-position: center;
-          image-rendering: pixelated;
+          background-color: #fff;
+          background-image:
+            repeating-conic-gradient(#000 0% 25%, transparent 0% 50%);
+          background-size: 4px 4px;
         }
+
+        /* ─── Menu Bar ────────────────────────────────────── */
         .menubar {
-          position: fixed; top: 0; left: 0; right: 0; height: 22px;
-          background: linear-gradient(180deg, #f4f4f4 0%, #e8e8e8 100%);
-          border-bottom: 1px solid #aaa;
-          display: flex; align-items: center; padding: 0 4px; gap: 2px;
-          z-index: 200; font-size: 13px; font-weight: 400;
-          -webkit-font-smoothing: antialiased;
+          position: fixed; top: 0; left: 0; right: 0; height: 24px;
+          background: #fff;
+          border-bottom: none;
+          box-shadow: 0px 1px 0px 0px #000;
+          display: flex; align-items: center; padding: 0 0; gap: 2px;
+          z-index: 200;
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 14px; font-weight: normal;
+          letter-spacing: -0.35px;
+        }
+        .menubar-apple {
+          display: flex; align-items: center; justify-content: center;
+          padding: 4px 14px; height: 24px;
         }
         .menubar-item {
-          padding: 1px 8px 2px; border-radius: 3px; color: #111;
-          white-space: nowrap; user-select: none;
+          padding: 4px 8px; height: 24px;
+          color: #000; white-space: nowrap; user-select: none;
+          display: flex; align-items: center;
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 14px; letter-spacing: -0.35px;
         }
-        .menubar-item.bold { font-weight: 700; }
-        .menubar-item.active, .menubar-item:hover { background: #1657d5; color: #fff; }
-        .menubar-apple { font-size: 17px; line-height: 1; padding: 0px 8px 2px; color: #111; }
-        .menubar-clock { margin-left: auto; font-size: 12px; color: #444; padding-right: 8px; }
+        .menubar-item:hover, .menubar-item.active {
+          background: #000; color: #fff;
+        }
+
+        /* ─── Desktop Icons ───────────────────────────────── */
         .icon-col {
-          position: fixed; top: 32px; right: 12px;
+          position: fixed; top: 40px; right: 0;
           display: flex; flex-direction: column; gap: 4px; z-index: 10;
         }
         .icon-item {
-          display: flex; flex-direction: column; align-items: center; gap: 3px;
-          padding: 5px 6px; border-radius: 4px; width: 72px;
-          text-align: center; transition: background 0.1s;
+          display: flex; flex-direction: column; align-items: center; gap: 1px;
+          padding: 4px 6px;
+          text-align: center;
         }
         .icon-item:hover, .icon-item.active {
-          background: rgba(0,40,120,0.3);
-          outline: 1px dashed rgba(255,255,255,0.4);
+          background: none;
+        }
+        .icon-item:hover .icon-label, .icon-item.active .icon-label {
+          background: #000; color: #fff;
+        }
+        .icon-item:hover svg, .icon-item.active svg {
+          filter: invert(1);
+          background: #000;
         }
         .icon-label {
-          font-size: 11px; font-weight: 500; color: #fff;
-          text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.6);
+          font-family: 'Geneva', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 14px; font-weight: normal; color: #000;
+          background: #fff; padding: 0 4px;
           line-height: 1.3; word-break: break-word;
         }
-        .trash-wrap { position: fixed; bottom: 20px; right: 12px; z-index: 10; }
+
+        /* ─── Trash ───────────────────────────────────────── */
+        .trash-wrap {
+          position: fixed; bottom: 32px; right: 39px; z-index: 10;
+        }
+
+        /* ─── Window ──────────────────────────────────────── */
         .window {
           position: fixed;
-          width: 380px; background: #ebebeb; border-radius: 6px; border: 1px solid #888;
-          box-shadow: 0 0 0 1px rgba(255,255,255,0.8) inset, 0 12px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+          width: 394px; background: #fff;
+          border: 1px solid #000;
+          box-shadow: 1px 1px 0px 1px #000;
           overflow: hidden; z-index: 50;
         }
         .window-titlebar {
-          height: 22px;
-          background: repeating-linear-gradient(180deg, #d8d8d8 0px, #d8d8d8 1px, #f0f0f0 1px, #f0f0f0 2px);
-          border-bottom: 1px solid #aaa;
-          display: flex; align-items: center; padding: 0 8px; gap: 6px; position: relative;
+          height: 28px;
+          background: #fff;
+          border-bottom: 1px solid #000;
+          position: relative;
+          overflow: hidden;
         }
-        .win-btn { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.3); flex-shrink: 0; }
-        .win-btn.close { background: #ff5f57; }
-        .win-btn.min   { background: #febc2e; }
-        .win-btn.max   { background: #28c840; }
-        .window-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 600; color: #333; white-space: nowrap; }
-        .window-body { padding: 28px 36px 32px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .app-name { font-size: 20px; font-weight: 700; color: #111; letter-spacing: -0.3px; }
-        .app-sub { font-size: 12px; color: #777; margin-top: -4px; }
-        .app-tagline { font-size: 13px; color: #555; text-align: center; line-height: 1.6; max-width: 260px; margin: 4px 0 8px; }
+        /* Horizontal stripes in titlebar */
+        .titlebar-stripes {
+          position: absolute;
+          top: 0; left: 4px; right: 4px; bottom: 0;
+        }
+        .titlebar-stripe {
+          position: absolute;
+          left: 0; right: 0; height: 1px;
+          background: #000;
+        }
+        /* Close box */
+        .close-box {
+          position: absolute; left: 13px; top: 5px;
+          width: 16px; height: 16px;
+          background: #fff;
+          border: 1px solid #000;
+          z-index: 2;
+        }
+        .close-box:hover {
+          background: #000;
+        }
+        /* Window title */
+        .window-title {
+          position: absolute;
+          left: 50%; top: -1px;
+          transform: translateX(-50%);
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 20px; font-weight: normal;
+          letter-spacing: -0.4px;
+          color: #000; white-space: nowrap;
+          background: #fff;
+          padding: 0 8px;
+          z-index: 2;
+          line-height: 28px;
+        }
+
+        /* ─── Window Body ─────────────────────────────────── */
+        .window-body {
+          padding: 28px 36px 32px;
+          display: flex; flex-direction: column; align-items: center; gap: 10px;
+          background: #fff;
+        }
+        .app-name {
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 20px; font-weight: normal; color: #000;
+          letter-spacing: -0.4px;
+        }
+        .app-sub {
+          font-family: 'Geneva', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 12px; color: #000; margin-top: -4px;
+        }
+        .app-tagline {
+          font-family: 'Geneva', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 14px; color: #000; text-align: center;
+          line-height: 1.6; max-width: 260px; margin: 4px 0 8px;
+        }
+
+        /* ─── Buttons (Classic Mac style) ─────────────────── */
         .download-btn {
-          display: inline-block; padding: 10px 40px;
-          background: linear-gradient(180deg, #f8f8f8 0%, #dcdcdc 100%);
-          border: 2px solid #333; border-radius: 6px;
-          box-shadow: 0 0 0 3px #333, 0 1px 0 #fff inset, 0 -1px 0 rgba(0,0,0,0.1) inset;
-          font-size: 15px; font-weight: 700; color: #111; text-decoration: none;
-          letter-spacing: -0.2px; transition: box-shadow 0.08s, transform 0.08s;
-          -webkit-font-smoothing: antialiased;
+          display: inline-block; padding: 8px 32px;
+          background: #fff;
+          border: 2px solid #000; border-radius: 16px;
+          box-shadow: 0 0 0 2px #000;
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 14px; font-weight: normal; color: #000;
+          text-decoration: none; letter-spacing: -0.35px;
+        }
+        .download-btn:hover {
+          background: #000; color: #fff;
         }
         .download-btn:active {
-          transform: translateY(1px);
-          box-shadow: 0 0 0 3px #333, 0 -1px 0 #fff inset, 0 1px 0 rgba(0,0,0,0.15) inset;
+          background: #000; color: #fff;
         }
         .btn-row { display: flex; gap: 10px; align-items: center; margin-top: 0; }
         .github-btn {
-          display: inline-block; padding: 10px 24px;
-          background: transparent;
-          border: 2px solid #333; border-radius: 6px;
-          box-shadow: 0 0 0 3px #333;
-          font-size: 15px; font-weight: 700; color: #111; text-decoration: none;
-          letter-spacing: -0.2px; transition: box-shadow 0.08s, transform 0.08s, background 0.08s;
-          -webkit-font-smoothing: antialiased;
+          display: inline-block; padding: 8px 20px;
+          background: #fff;
+          border: 1px solid #000; border-radius: 16px;
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 14px; font-weight: normal; color: #000;
+          text-decoration: none; letter-spacing: -0.35px;
         }
-        .github-btn:hover { background: rgba(0,0,0,0.04); }
-        .github-btn:active {
-          transform: translateY(1px);
-          box-shadow: 0 0 0 3px #333;
+        .github-btn:hover {
+          background: #000; color: #fff;
         }
-        .dl-meta { font-size: 10px; color: #999; margin-top: 2px; letter-spacing: 0.2px; }
+        .dl-meta {
+          font-family: 'Geneva', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 10px; color: #000; margin-top: 2px; letter-spacing: 0.2px;
+        }
+
+        /* ─── AI Panel (styled for classic Mac) ───────────── */
         .hp-panel {
           position: fixed; z-index: 9000; width: 320px;
-          background: rgba(12,12,18,0.97);
-          border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+          background: #fff;
+          border: 1px solid #000;
+          box-shadow: 1px 1px 0px 1px #000;
           padding: 10px 14px 12px;
-          font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
-          font-size: 11px; color: #c8c8d8;
-          box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(255,255,255,0.06) inset;
+          font-family: 'Geneva', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 12px; color: #000;
           pointer-events: none;
-          backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
         }
         .hp-header {
           display: flex; align-items: center; gap: 6px;
           margin-bottom: 8px; padding-bottom: 8px;
-          border-bottom: 1px solid rgba(255,255,255,0.07);
+          border-bottom: 1px solid #000;
         }
         .hp-dot {
-          width: 7px; height: 7px; border-radius: 50%;
-          background: #4af0a0; box-shadow: 0 0 6px #4af0a0; flex-shrink: 0;
+          width: 7px; height: 7px;
+          background: #000;
+          flex-shrink: 0;
           animation: hp-pulse 1.4s ease-in-out infinite;
         }
         @keyframes hp-pulse {
           0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(0.85); }
+          50% { opacity: 0.4; transform: scale(0.85); }
         }
-        .hp-app-label { font-size: 10px; color: #666; letter-spacing: 0.4px; text-transform: uppercase; }
-        .hp-context { color: #8a8a9e; line-height: 1.7; white-space: pre; font-size: 11px; }
-        .hp-conversation { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.07); }
-        .hp-q { color: #e8e8f0; margin-bottom: 6px; }
-        .hp-q::before { content: '> '; color: #4af0a0; font-weight: bold; }
-        .hp-a { color: #9ab8d0; line-height: 1.65; white-space: pre-wrap; }
-        .hp-a.is-action { color: #7fd88a; }
+        .hp-app-label {
+          font-family: 'ChicagoFLF', 'Chicago', sans-serif;
+          font-size: 12px; color: #000;
+          letter-spacing: 0.4px; text-transform: uppercase;
+        }
+        .hp-context { color: #000; line-height: 1.7; white-space: pre; font-size: 12px; }
+        .hp-conversation {
+          margin-top: 10px; padding-top: 10px;
+          border-top: 1px solid #000;
+        }
+        .hp-q { color: #000; margin-bottom: 6px; font-weight: bold; }
+        .hp-q::before { content: '> '; font-weight: bold; }
+        .hp-a { color: #000; line-height: 1.65; white-space: pre-wrap; }
+        .hp-a.is-action { color: #000; }
         .hp-blink {
           display: inline-block; width: 6px; height: 12px;
-          background: #4af0a0; vertical-align: text-bottom; margin-left: 1px;
+          background: #000; vertical-align: text-bottom; margin-left: 1px;
           animation: blink 0.75s step-end infinite;
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; will-change: transform; }
+
+        /* ─── Cursor ──────────────────────────────────────── */
+        .cursor {
+          position: fixed; top: 0; left: 0;
+          pointer-events: none; z-index: 99999; will-change: transform;
+        }
         .cursor-active {
           position: absolute; top: 6px; left: 11px;
-          width: 7px; height: 7px; border-radius: 50%;
-          background: #4af0a0;
-          box-shadow: 0 0 8px #4af0a0, 0 0 16px rgba(74,240,160,0.4);
+          width: 7px; height: 7px;
+          background: #000;
           animation: hp-pulse 1s ease-in-out infinite;
+        }
+
+        /* ─── Scrollbar decorations (visual only) ─────────── */
+        .scrollbar-right {
+          position: absolute; top: 28px; right: -1px; bottom: -1px;
+          width: 28px; background: #fff;
+          border-left: 1px solid #000;
+          border: 1px solid #000;
+        }
+        .scrollbar-bottom {
+          position: absolute; bottom: -1px; left: -1px; right: 27px;
+          height: 28px; background: #fff;
+          border: 1px solid #000;
+        }
+        .resize-handle {
+          position: absolute; bottom: -1px; right: -1px;
+          width: 28px; height: 28px;
+          background: #fff;
+          border: 1px solid #000;
+        }
+        .resize-inner-lg {
+          position: absolute; bottom: 5px; right: 5px;
+          width: 13px; height: 13px;
+          border: 1px solid #000; background: #fff;
+        }
+        .resize-inner-sm {
+          position: absolute; top: 0; left: 0;
+          width: 10px; height: 10px;
+          border: 1px solid #000; background: #fff;
         }
       `}</style>
 
       <div className="desktop" />
 
+      {/* ─── Menu Bar ─────────────────────────────────────── */}
       <div className="menubar">
-        <span className="menubar-apple" {...bind('apple')}>&#xF8FF;</span>
-        <span className={`menubar-item bold ${hoveredId === 'finder' ? 'active' : ''}`} {...bind('finder')}>Finder</span>
-        <span className="menubar-item">File</span>
+        <span className="menubar-apple" {...bind('apple')}>
+          <AppleLogo />
+        </span>
+        <span className={`menubar-item ${hoveredId === 'finder' ? 'active' : ''}`} {...bind('finder')}>File</span>
         <span className="menubar-item">Edit</span>
         <span className="menubar-item">View</span>
         <span className="menubar-item">Special</span>
-        <span className="menubar-item">Help</span>
-        <span className="menubar-clock">{time}</span>
       </div>
 
+      {/* ─── Desktop Icons ────────────────────────────────── */}
       <div className="icon-col">
         <div className={`icon-item ${hoveredId === 'hd' ? 'active' : ''}`} {...bind('hd')}>
-          <IconHD />
-          <span className="icon-label">Macintosh HD</span>
-        </div>
-        <div className={`icon-item ${hoveredId === 'hp' ? 'active' : ''}`} {...bind('hp')}>
-          <IconHP />
-          <span className="icon-label">This</span>
+          <IconFloppy />
+          <span className="icon-label">System Software</span>
         </div>
       </div>
 
+      {/* ─── Trash ────────────────────────────────────────── */}
       <div className="trash-wrap">
         <div className={`icon-item ${hoveredId === 'trash' ? 'active' : ''}`} {...bind('trash')}>
-          <IconTrash empty />
+          <IconTrash />
           <span className="icon-label">Trash</span>
         </div>
       </div>
 
+      {/* ─── Window ───────────────────────────────────────── */}
       <div
         className="window"
         style={winPos ? { left: winPos.x, top: winPos.y } : { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
       >
         <div className="window-titlebar" onMouseDown={handleTitlebarMouseDown} style={{ userSelect: 'none' }}>
-          <div className="win-btn close" />
-          <div className="win-btn min" />
-          <div className="win-btn max" />
+          <div className="titlebar-stripes">
+            <div className="titlebar-stripe" style={{ top: 6 }} />
+            <div className="titlebar-stripe" style={{ top: 9 }} />
+            <div className="titlebar-stripe" style={{ top: 12 }} />
+            <div className="titlebar-stripe" style={{ top: 15 }} />
+            <div className="titlebar-stripe" style={{ top: 18 }} />
+            <div className="titlebar-stripe" style={{ top: 21 }} />
+          </div>
+          <div className="close-box" />
           <span className="window-title">This</span>
         </div>
         <div className="window-body">
-          <IconHP />
           <div className="app-name">This</div>
           <div className="app-sub">Version 1.0.31</div>
           <p className="app-tagline">
-            Hold <kbd style={{ fontFamily: 'inherit', fontWeight: 700 }}>⌘</kbd>.<br />
+            Hold <kbd style={{ fontFamily: 'inherit', fontWeight: 700 }}>&#x2318;</kbd>.<br />
             Point at anything on your screen.<br />
             Ask Claude about it.
           </p>
@@ -440,10 +560,22 @@ export default function Home() {
               GitHub
             </a>
           </div>
-          <div className="dl-meta">macOS 14+ &nbsp;·&nbsp; Free &nbsp;·&nbsp; Requires Claude CLI</div>
+          <div className="dl-meta">macOS 14+ &nbsp;&middot;&nbsp; Free &nbsp;&middot;&nbsp; Requires Claude CLI</div>
+        </div>
+
+        {/* Scrollbar decorations */}
+        <div className="scrollbar-right" />
+        <div className="scrollbar-bottom" />
+        <div className="resize-handle">
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <div className="resize-inner-lg">
+              <div className="resize-inner-sm" />
+            </div>
+          </div>
         </div>
       </div>
 
+      {/* ─── AI Panel ─────────────────────────────────────── */}
       {currentItem && (
         <div className="hp-panel" style={{ left: panelX, top: panelY }}>
           <div className="hp-header">
@@ -471,6 +603,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* ─── Custom Cursor ────────────────────────────────── */}
       <div className="cursor" style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}>
         {isPointerTarget ? (
           <svg width="18" height="24" viewBox="0 0 18 24" fill="none">
