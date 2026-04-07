@@ -777,6 +777,49 @@ export default function Home() {
           mix-blend-mode: multiply;
           opacity: 0.35;
         }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+          .window {
+            width: 100vw !important;
+            top: 24px !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            transform: none !important;
+            border-left: none;
+            border-right: none;
+            box-shadow: none;
+          }
+          .window-body {
+            padding: 20px 16px 24px;
+          }
+          .video-embed {
+            max-width: 100%;
+          }
+          .scrollbar-right,
+          .scrollbar-bottom,
+          .resize-handle {
+            display: none;
+          }
+          .photo-window,
+          .icon-col,
+          .trash-wrap {
+            display: none;
+          }
+          .cmd-menu {
+            width: 100vw !important;
+            left: 0 !important;
+            transform: none !important;
+            bottom: 0 !important;
+            border-left: none;
+            border-right: none;
+          }
+          @keyframes cmd-slide-up {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        }
       `}</style>
 
       <div className="desktop" {...bind("desktop")} />
