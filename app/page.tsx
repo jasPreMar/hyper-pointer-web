@@ -462,7 +462,7 @@ export default function Home() {
         }
         .window {
           position: fixed;
-          width: 394px; background: #fff;
+          width: 520px; background: #fff;
           border: 1px solid #000;
           box-shadow: 1px 1px 0px 1px #000;
           overflow: hidden; z-index: 50;
@@ -524,8 +524,8 @@ export default function Home() {
           line-height: 1.6; max-width: 260px; margin: 4px 0 8px;
         }
         .video-embed {
-          width: 100%; max-width: 320px;
-          aspect-ratio: 16 / 9;
+          width: 100%; max-width: 440px;
+          aspect-ratio: 16 / 10;
           border: 2px solid #000;
           margin: 4px 0;
           background: #000;
@@ -965,22 +965,9 @@ export default function Home() {
         <div className="window-body">
           <div {...bind("app-icon")}><IconThis /></div>
           <div className="app-name" {...bind("app-name")}>This</div>
-          <div className="app-sub" {...bind("version")}>Version 1.0</div>
           <p className="app-tagline" {...bind("tagline")}>
-            Point at anything on your screen.
-            <br />
-            Speak or type.
-            <br />
-            It already knows what you mean.
+            Point. Speak. Claude.
           </p>
-          <div className="video-embed">
-            <iframe
-              src="https://www.youtube.com/embed/e7nriIU9bM8"
-              title="This — Demo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
           <div className="btn-row">
             <a
               href={DMG_URL}
@@ -1002,6 +989,14 @@ export default function Home() {
           </div>
           <div className="dl-meta" {...bind("dl-meta")}>
             macOS 26+ Tahoe &nbsp;&middot;&nbsp; Free
+          </div>
+          <div className="video-embed">
+            <iframe
+              src="https://www.youtube.com/embed/e7nriIU9bM8"
+              title="This — Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </div>
         <div className="scrollbar-right" {...bind("scrollbar")} />
